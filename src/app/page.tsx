@@ -3,11 +3,14 @@ import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import LoginButton from "@/components/LoginButton";
+import './globals.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const { data: session } = useSession();
+
+  console.log(session);
 
   return (
     <main
