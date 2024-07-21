@@ -9,12 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.1",
     "@solana/actions": "^1.2.0",
     "@solana/web3.js": "^1.95.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.412.0",
+    "mongodb": "^6.8.0",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
+    "openai": "^4.52.7",
     "react": "^18",
     "react-dom": "^18",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7",
     "url-metadata": "^4.1.1"
   },
   "devDependencies": {

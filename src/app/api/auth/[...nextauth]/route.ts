@@ -1,3 +1,4 @@
+import { connectToDatabase } from "@/lib/mongodb";
 import NextAuth, { Account, Profile, User } from "next-auth"
 import GithbProvider from "next-auth/providers/github"
 
@@ -11,15 +12,28 @@ const handler = NextAuth({
     // ...add more providers here
   ],
   callbacks: {
-    signIn: ({user, account, profile, email, credentials}) => {
+    signIn: async ({user, account, profile, email, credentials}) => {
       console.log(user, account, profile)
+      const profileData: any = profile;
+
       const userData = {...user, ...account, ...profile}
+      try {
+        const { db } = await connectToDatabase();
+
+        const savedUser = await db.collection('users').updateOne(
+          { login: profileData?.login }, // Use email as the unique identifier
+          { $set: userData },
+          { upsert: true });
+          console.log(savedUser)
+      } catch (error) {
+        console.log(error) 
+      }
       return Promise.resolve(true)
     },
-    session: ({session, user}) => {
-      console.log(session, user)
-      return Promise.resolve(session)
-    },
+    // session: ({session, user}) => {
+    //   console.log(session, user)
+    //   return Promise.resolve(session)
+    // },
   }
 
   // A database is optional, but required to persist accounts in a database

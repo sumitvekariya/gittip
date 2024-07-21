@@ -1,3 +1,4 @@
+import { connectToDatabase } from "@/lib/mongodb";
 import {
   ActionPostResponse,
   ACTIONS_CORS_HEADERS,
@@ -16,8 +17,9 @@ import {
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
+import OpenAI from "openai";
 import urlMetadata from "url-metadata";
-// import { DEFAULT_SOL_ADDRESS, DEFAULT_SOL_AMOUNT } from "./const";
+
 
 export const GET = async (req: Request) => {
   try {
@@ -25,11 +27,46 @@ export const GET = async (req: Request) => {
 
     const username  = requestUrl.searchParams.get('gituser') || 'sumitvekariya';
 
-    const { title, description, ...metadata } = await urlMetadata(`https://github.com/${username}`);
+    let description = '';
+    let solanaAddress = '';
+
+    const { title, ...metadata } = await urlMetadata(`https://github.com/${username}`);
 
     const image = metadata["og:image"];
+    description = metadata["description"];
+
+
+    const { db } = await connectToDatabase();
+    try {
+      const user = await db.collection('users').findOne({ login: username });
+      description = user?.description;
+      solanaAddress = user?.solanaAddress;
+    } catch (error) {
+      console.log(error);
+    }
 
     console.log(metadata);
+    // const openai = new OpenAI({
+    //   apiKey: process.env.OPENAI_API_KEY,
+    // });
+
+    // var response = null;
+
+    // try {
+    //   response = await openai.chat.completions.create({
+    //     model: 'gpt-4o-mini', // Specify the model you want to use
+    //     messages: [
+    //       { role: 'system', content: `You are a dev who owns this github profile ${username}` },
+    //       { role: 'user', content: 'Write a brief summary(without markup) in plain text (including top 3 languages you code in and top 5 projects) on why would someone donate you based on your github stats & overall reputaion as a dev on socials based' },
+    //     ],
+    //     response_format: { type: 'text' }
+    //   });
+    //   console.log(response.choices[0].message.content);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+
 
     const baseHref = new URL(
       `/api/actions/gittip?to=${username}`,
@@ -39,25 +76,25 @@ export const GET = async (req: Request) => {
     const payload: ActionGetResponse = {
       title: title ?? "Actions Example - Transfer Native SOL",
       icon: image,
-      description: description ?? "Send SOL to a GitHub user",
+      description,
       label: "Donate", // this value will be ignored since `links.actions` exists
       links: {
         actions: [
           {
             label: "Send 1 SOL", // button text
-            href: `${baseHref}&amount=${"1"}`,
+            href: `${baseHref}&amount=${"1"}&to=${solanaAddress}`,
           },
           {
             label: "Send 5 SOL", // button text
-            href: `${baseHref}&amount=${"5"}`,
+            href: `${baseHref}&amount=${"5"}&to=${solanaAddress}`,
           },
           {
             label: "Send 10 SOL", // button text
-            href: `${baseHref}&amount=${"10"}`,
+            href: `${baseHref}&amount=${"10"}&to=${solanaAddress}`,
           },
           {
             label: "Send SOL", // button text
-            href: `${baseHref}&amount={amount}`, // this href will have a text input
+            href: `${baseHref}&amount={amount}&to=${solanaAddress}`, // this href will have a text input
             parameters: [
               {
                 name: "amount", // parameter name in the `href` above
