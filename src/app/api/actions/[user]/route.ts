@@ -19,13 +19,16 @@ import {
 } from "@solana/web3.js";
 import OpenAI from "openai";
 import urlMetadata from "url-metadata";
+import {getOrCreateAssociatedTokenAccount, getAssociatedTokenAddressSync,createTransferInstruction} from "@solana/spl-token";
 
 
 export const GET = async (req: Request) => {
   try {
     const requestUrl = new URL(req.url);
 
-    const username  = requestUrl.searchParams.get('gituser') || 'sumitvekariya';
+    const splitPath = requestUrl.pathname.split("/");
+
+    const username = splitPath[splitPath.length - 1];
 
     let description = '';
     let solanaAddress = '';
@@ -81,24 +84,12 @@ export const GET = async (req: Request) => {
       links: {
         actions: [
           {
-            label: "Send 1 SOL", // button text
-            href: `${baseHref}&amount=${"1"}&to=${solanaAddress}`,
-          },
-          {
-            label: "Send 5 SOL", // button text
-            href: `${baseHref}&amount=${"5"}&to=${solanaAddress}`,
-          },
-          {
-            label: "Send 10 SOL", // button text
-            href: `${baseHref}&amount=${"10"}&to=${solanaAddress}`,
-          },
-          {
-            label: "Send SOL", // button text
+            label: "Donate SEND", // button text
             href: `${baseHref}&amount={amount}&to=${solanaAddress}`, // this href will have a text input
             parameters: [
               {
                 name: "amount", // parameter name in the `href` above
-                label: "Enter the amount of SOL to send", // placeholder of the text input
+                label: "Enter the amount of SEND to donate", // placeholder of the text input
                 required: true,
               },
             ],
@@ -155,16 +146,34 @@ export const POST = async (req: Request) => {
       throw `account may not be rent exempt: ${toPubkey.toBase58()}`;
     }
 
-    const transaction = new Transaction();
-
-    transaction.add(
-      SystemProgram.transfer({
-        fromPubkey: account,
-        toPubkey: toPubkey,
-        lamports: amount * LAMPORTS_PER_SOL,
-      }),
+    const senderAccount = getAssociatedTokenAddressSync(
+      new PublicKey('SENDdRQtYMWaQrBroBrJ2Q53fgVuq95CV9UPGEvpCxa'),
+      account,
     );
 
+    const receiverAccount = getAssociatedTokenAddressSync(
+      new PublicKey('SENDdRQtYMWaQrBroBrJ2Q53fgVuq95CV9UPGEvpCxa'),
+      toPubkey,
+    )
+
+    console.log("sender account", senderAccount.toBase58(), "receiver account" ,receiverAccount.toBase58());
+
+          
+    const transaction = new Transaction();
+    transaction.feePayer = account;
+
+    const latestBlockhash = await connection.getLatestBlockhash();
+
+    transaction!.recentBlockhash = latestBlockhash.blockhash;
+    transaction!.lastValidBlockHeight = latestBlockhash.lastValidBlockHeight;
+
+    transaction.add(createTransferInstruction(
+        senderAccount,
+        receiverAccount,
+        account,
+        amount * Math.pow(10, 6)
+    ));
+            
     // set the end user as the fee payer
     transaction.feePayer = account;
 
@@ -175,7 +184,7 @@ export const POST = async (req: Request) => {
     const payload: ActionPostResponse = await createPostResponse({
       fields: {
         transaction,
-        message: `Send ${amount} SOL to ${toPubkey.toBase58()}`,
+        message: `Send ${amount} SEND to ${toPubkey.toBase58()}`,
       },
       // note: no additional signers are needed
       // signers: [],
