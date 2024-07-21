@@ -19,7 +19,7 @@ import {
 } from "@solana/web3.js";
 import OpenAI from "openai";
 import urlMetadata from "url-metadata";
-import {getOrCreateAssociatedTokenAccount, getAssociatedTokenAddressSync,createTransferInstruction} from "@solana/spl-token";
+import {getAssociatedTokenAddressSync,createTransferInstruction} from "@solana/spl-token";
 
 
 export const GET = async (req: Request) => {
@@ -30,20 +30,23 @@ export const GET = async (req: Request) => {
 
     const username = splitPath[splitPath.length - 1];
 
-    let description = '';
     let solanaAddress = '';
 
     const { title, ...metadata } = await urlMetadata(`https://github.com/${username}`);
 
     const image = metadata["og:image"];
-    description = metadata["description"];
+    let description = metadata?.description;
 
 
     const { db } = await connectToDatabase();
     try {
       const user = await db.collection('users').findOne({ login: username });
-      description = user?.description;
-      solanaAddress = user?.solanaAddress;
+      if (user?.description) {
+        description = user.description;
+      }
+      if (user?.solanaAddress) {
+        solanaAddress = user.solanaAddress;
+      }
     } catch (error) {
       console.log(error);
     }

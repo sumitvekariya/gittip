@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Bounce, toast } from "react-toastify";
 
 export default function Home() {
 
@@ -16,7 +17,6 @@ export default function Home() {
   const [solanaAddress, setSolanaAddress] = useState('');
   const [description, setDescription] = useState('');
 
-  const { toast } = useToast()
   const [user, setUser] = useState(null);
 
 
@@ -30,24 +30,37 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({solanaAddress, description, email: session?.user?.email}),
+      body: JSON.stringify({ solanaAddress, description, email: session?.user?.email }),
     }).then((res) => res.json())
-    .then((data) => {
-      toast({
-        title: 'Blink generated',
-        description: 'Blink copied to clipboard',
-      })
-      window.open(encodeURI(`https://dial.to/?action=solana-action:${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/api/gittip?gituser=${user?.login}`), '_blank');
+      .then((data) => {
+        toast.success('Saved & copied to clipboard!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          });
 
-    });
+        const url = encodeURI(`https://dial.to/?action=solana-action:${process.env.NEXT_PUBLIC_ENVIRONMENT_URL}/api/actions/${user?.login}`)
+        navigator.clipboard.writeText(url)
+
+        setTimeout(() => {
+          window.open(url, '_blank');
+        }, 2000)
+
+      });
     console.log('Response:', res);
   };
 
   const fetchUser = async () => {
     const userFound = await fetch('/api/users?email=' + session?.user?.email)
-    .then((res) => res.json())
-    .then((data) => data.data)
-    .catch((error) => console.error('Error:', error));
+      .then((res) => res.json())
+      .then((data) => data.data)
+      .catch((error) => console.error('Error:', error));
     console.log('User:', userFound);
 
     if (!userFound?.description) {
@@ -115,7 +128,7 @@ export default function Home() {
 
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-          Write a brief summary on Why should someone donate / hire you?
+            Write a brief summary on Why should someone donate / hire you?
           </label>
           <Textarea
             id="description"
