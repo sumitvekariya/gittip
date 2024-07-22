@@ -75,7 +75,7 @@ export const GET = async (req: Request) => {
 
 
     const baseHref = new URL(
-      `/api/actions/gittip?to=${username}`,
+      `/api/actions/gittip`,
       requestUrl.origin,
     ).toString();
 
@@ -88,7 +88,7 @@ export const GET = async (req: Request) => {
         actions: [
           {
             label: "Donate SEND", // button text
-            href: `${baseHref}&amount={amount}&to=${solanaAddress}`, // this href will have a text input
+            href: `${baseHref}?amount={amount}&to=${solanaAddress}`, // this href will have a text input
             parameters: [
               {
                 name: "amount", // parameter name in the `href` above
