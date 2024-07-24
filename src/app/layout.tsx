@@ -10,6 +10,16 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Gittip",
   description: "Convert your GitHub profile into a Solana blink to receive donations / get hired",
+  openGraph: {
+    images: [
+      {
+        url: "https://gittip.dev/vercel.svg",
+        width: 1200,
+        height: 630,
+        alt: "Gittip",
+      },
+    ]
+  }
 };
 
 export default function RootLayout({
