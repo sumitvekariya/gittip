@@ -58,3 +58,5 @@ Note: Testing PR linking for issue #24.
 Note: Testing PR linking for issue #26.
 
 Note: Testing PR linking for issue #28.
+
+Note: Testing PR linking for issue #30.
