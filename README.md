@@ -2,6 +2,12 @@ This is a work in progress project by sarkazein.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js (v18 or higher)
+- pnpm (recommended) or npm/yarn
+
 ## Getting Started
 
 First, run the development server:
@@ -36,3 +42,33 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+---
+
+Note: This line was added to test PR merge detection.
+
+Note: Testing PR linking for issue #11.
+
+Note: Testing PR linking for issue #14.
+
+Note: Testing PR linking for issue #16.
+
+Note: Testing PR linking for issue #18.
+
+Note: Testing PR linking for issue #20.
+
+Note: Testing PR linking for issue #22.
+
+Note: Testing PR linking for issue #24.
+
+Note: Testing PR linking for issue #26.
+
+Note: Testing PR linking for issue #28.
+
+Note: Testing PR linking for issue #30.
+
+Note: Testing PR linking for issue #32.
+
+Note: Testing PR linking for issue #34.
+
+Note: Testing PR linking for issue #36.
