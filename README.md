@@ -8,6 +8,21 @@ Before you begin, ensure you have the following installed:
 - Node.js (v18 or higher)
 - pnpm (recommended) or npm/yarn
 
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/sumitvekariya/gittip.git
+cd gittip
+```
+
+2. Install dependencies:
+```bash
+pnpm install
+# or
+npm install
+```
+
 ## Getting Started
 
 First, run the development server:
