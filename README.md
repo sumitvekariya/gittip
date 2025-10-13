@@ -32,6 +32,16 @@ pnpm install
 npm install
 ```
 
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+
+Then update the `.env.local` file with your configuration values:
+- MongoDB connection string
+- NextAuth secrets and providers
+- Any other required API keys
+
 ## Getting Started
 
 First, run the development server:
