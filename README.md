@@ -132,6 +132,55 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+## Troubleshooting
+
+### Common Issues and Solutions
+
+#### Dependencies Installation Failed
+
+If you encounter errors during `pnpm install` or `npm install`:
+
+```bash
+# Clear cache and reinstall
+rm -rf node_modules package-lock.json pnpm-lock.yaml
+pnpm install
+# or
+npm install
+```
+
+#### Environment Variables Not Loading
+
+Ensure your `.env.local` file is:
+- In the root directory
+- Not committed to git (check `.gitignore`)
+- Has all required variables from `.env.example`
+
+Restart the development server after making changes to environment variables.
+
+#### Port Already in Use
+
+If you see "Port 3000 is already in use":
+
+```bash
+# Find and kill the process using port 3000
+lsof -ti:3000 | xargs kill -9
+# Then restart the dev server
+pnpm dev
+```
+
+#### MongoDB Connection Issues
+
+- Verify your MongoDB connection string is correct
+- Ensure your IP address is whitelisted (for cloud databases)
+- Check if MongoDB service is running (for local databases)
+
+### Getting Help
+
+If you're still experiencing issues:
+- Check [GitHub Issues](https://github.com/sumitvekariya/gittip/issues) for similar problems
+- Create a new issue with detailed error messages and steps to reproduce
+- Join our community discussions for support
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
