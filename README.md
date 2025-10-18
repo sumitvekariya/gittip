@@ -2,6 +2,46 @@ This is a work in progress project by sarkazein.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Features
+
+- 🚀 Built with Next.js 14+ and React
+- 💎 TypeScript support
+- 🎨 Tailwind CSS for styling
+- 🔐 NextAuth.js for authentication
+- 📦 MongoDB integration
+- 🎯 Modern UI components with shadcn/ui
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js (v18 or higher)
+- pnpm (recommended) or npm/yarn
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/sumitvekariya/gittip.git
+cd gittip
+```
+
+2. Install dependencies:
+```bash
+pnpm install
+# or
+npm install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+
+Then update the `.env.local` file with your configuration values:
+- MongoDB connection string
+- NextAuth secrets and providers
+- Any other required API keys
+
 ## Getting Started
 
 First, run the development server:
@@ -66,3 +106,5 @@ Note: Testing PR linking for issue #32.
 Note: Testing PR linking for issue #34.
 
 Note: Testing PR linking for issue #36.
+
+Note: Testing PR linking for issue #47.
