@@ -79,6 +79,44 @@ gittip/
 └── ...config files
 ```
 
+## Contributing
+
+We welcome contributions from the community! Here's how you can help:
+
+### How to Contribute
+
+1. **Fork the repository** and clone it locally
+2. **Create a new branch** for your feature or bugfix:
+   ```bash
+   git checkout -b feature/your-feature-name
+   # or
+   git checkout -b fix/your-bug-fix
+   ```
+3. **Make your changes** and commit them using conventional commits
+4. **Push to your fork** and submit a pull request
+
+### Commit Message Convention
+
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+- `feat:` - New features
+- `fix:` - Bug fixes
+- `docs:` - Documentation changes
+- `style:` - Code style changes (formatting, missing semicolons, etc.)
+- `refactor:` - Code refactoring
+- `test:` - Adding or updating tests
+- `chore:` - Maintenance tasks
+
+**Example:** `feat: add user authentication system`
+
+### Pull Request Process
+
+1. Ensure your code follows the project's code style
+2. Update documentation if needed
+3. Add tests for new features
+4. Ensure all tests pass
+5. Link related issues in your PR description
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
