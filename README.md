@@ -174,6 +174,38 @@ pnpm dev
 - Ensure your IP address is whitelisted (for cloud databases)
 - Check if MongoDB service is running (for local databases)
 
+#### TypeScript Errors
+
+If you encounter TypeScript compilation errors:
+
+```bash
+# Clear TypeScript cache
+rm -rf .next
+# Reinstall type definitions
+pnpm add -D @types/node @types/react @types/react-dom
+# Restart the dev server
+pnpm dev
+```
+
+#### Build Failures
+
+If production build fails:
+
+```bash
+# Run build with verbose output
+pnpm build --debug
+# Check for missing environment variables
+# Ensure all imports are correct
+```
+
+#### Hot Reload Not Working
+
+If changes aren't reflecting in the browser:
+- Clear browser cache
+- Stop the dev server and restart: `pnpm dev`
+- Check for syntax errors in your code
+- Disable browser extensions that might interfere
+
 ### Getting Help
 
 If you're still experiencing issues:
