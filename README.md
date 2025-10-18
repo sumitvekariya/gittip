@@ -206,6 +206,36 @@ If changes aren't reflecting in the browser:
 - Check for syntax errors in your code
 - Disable browser extensions that might interfere
 
+#### Authentication Issues
+
+If you're having problems with NextAuth.js:
+
+```bash
+# Verify environment variables
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret-here
+```
+
+- Ensure `NEXTAUTH_SECRET` is set (generate with: `openssl rand -base64 32`)
+- Check provider credentials (GitHub, Google, etc.)
+- Clear cookies and session storage in browser
+
+#### Styling Not Applied
+
+If Tailwind CSS styles aren't working:
+- Check `tailwind.config.ts` for correct content paths
+- Verify `globals.css` imports Tailwind directives
+- Restart dev server after config changes
+- Clear `.next` folder: `rm -rf .next`
+
+#### API Routes 404 Errors
+
+If API routes return 404:
+- Verify file is in correct location (`src/app/api/`)
+- Check file naming (must be `route.ts` or `route.js`)
+- Ensure proper HTTP method handler is exported (GET, POST, etc.)
+- Restart development server
+
 ### Getting Help
 
 If you're still experiencing issues:
