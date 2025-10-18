@@ -62,6 +62,23 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Project Structure
+
+```
+gittip/
+├── src/
+│   ├── app/              # Next.js app directory
+│   │   ├── api/          # API routes
+│   │   ├── actions.json/ # Server actions
+│   │   └── auth/         # Authentication routes
+│   ├── components/       # React components
+│   │   └── ui/           # UI components (shadcn/ui)
+│   ├── lib/              # Utility functions and configurations
+│   └── providers/        # Context providers
+├── public/               # Static assets
+└── ...config files
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
