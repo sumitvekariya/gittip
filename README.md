@@ -132,6 +132,34 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+## FAQ
+
+### Frequently Asked Questions
+
+**Q: What is this project about?**  
+A: This is a work-in-progress project built with Next.js, featuring authentication, database integration, and modern UI components. It serves as a full-stack web application template.
+
+**Q: Why use Next.js instead of plain React?**  
+A: Next.js provides server-side rendering, API routes, file-based routing, and excellent performance optimizations out of the box, making it ideal for production applications.
+
+**Q: Can I use this as a template for my own project?**  
+A: Yes! This project is open source under the MIT License. Feel free to fork it and customize it for your needs.
+
+**Q: What database does this project use?**  
+A: The project uses MongoDB for data storage. You can easily swap it for another database by modifying the database connection configuration in `src/lib/mongodb.ts`.
+
+**Q: How do I add new UI components?**  
+A: This project uses shadcn/ui components. You can add new components using:
+```bash
+npx shadcn-ui@latest add [component-name]
+```
+
+**Q: Is this project production-ready?**  
+A: This is currently a work-in-progress project. While it includes production-grade tools and practices, make sure to review and test thoroughly before deploying to production.
+
+**Q: How can I contribute?**  
+A: Check out the [Contributing](#contributing) section for guidelines on how to contribute to the project!
+
 ## Troubleshooting
 
 ### Common Issues and Solutions
