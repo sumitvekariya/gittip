@@ -307,3 +307,5 @@ Note: Testing PR linking for issue #34.
 
 Note: Testing PR linking for issue #36.
 Note: Testing PR linking for issue #68.
+
+Note: Testing PR linking for issue #72.
